@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <cstdlib>
 #include "Goat.h"
 using namespace std;
 
@@ -16,7 +17,7 @@ const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
-void add_goat(list<Goat> &trip, string [], string []);
+void add_goat(list<Goat> &trip, string names[], string colors[]);
 void display_trip(list<Goat> trip);
 int main_menu();
 
@@ -57,9 +58,39 @@ int main_menu(){
 }
 
 void display_trip(list<Goat> trip){
-    for(char it = trip.begin(); it != trip.end(); ++it){
-        cout<<*it<<endl;
+    int i = 1;
+    for(const auto& goat : trip){
+        cout<<"["<<i<<"] "<<goat.get_name()<<" ("<<goat.get_age()<<", "<<goat.get_color()<<")"<<endl;
+        i++;
     }
+    
+}
+
+void add_goat(list<Goat> &trip, string names[], string colors[]){
+    string name = names[rand() % SZ_NAMES];
+    string color = colors[rand() % SZ_COLORS];
+    int age = rand() % (MAX_AGE + 1);
+    
+    trip.push_back(Goat(name, age, color));
+    
+}
+
+int select_goat(list<Goat> trip){
+    int i = 1;
+    for(const auto& goat : trip){
+        cout<<"["<<i<<"] "<<goat.get_name()<<" ("<<goat.get_age()<<", "<<goat.get_color()<<")"<<endl;
+        i++;
+    }
+    
+    int choice;
+    cout<<"Please select a certain goat: ";
+    cin>>choice;
+    return choice - 1;
+}
+
+void delete_goat(list<Goat> &trip){
+    int choice = select_goat(<#list<Goat> trip#>);
+    auto it = trip.begin();
     
     
 }
