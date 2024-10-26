@@ -37,7 +37,23 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-
+    list<Goat> trip;
+    
+    bool flag = 1;
+    
+    while(flag == 1){
+        switch(main_menu()){
+            case 1: add_goat(trip, names, colors);
+                break;
+            case 2: delete_goat(trip);
+                break;
+            case 3: display_trip(trip);
+                break;
+            case 4: flag = 0;
+                break;
+        }
+        
+    }
 
 
     return 0;
@@ -89,8 +105,9 @@ int select_goat(list<Goat> trip){
 }
 
 void delete_goat(list<Goat> &trip){
-    int choice = select_goat(<#list<Goat> trip#>);
+    int choice = select_goat(trip);
     auto it = trip.begin();
-    
+    advance(it, choice);
+    trip.erase(it);
     
 }
